@@ -1,0 +1,118 @@
+{
+  "owner": "Firaga Pratama",
+  "role": "QA Engineer",
+  "stack": ["qa-assistant-tools", "Playwright", "OpenRouter AI", "Newman"],
+  "mode": "qa-tools",
+  "stages": [
+    {
+      "id": "record",
+      "name": "Record Session",
+      "type": "capture",
+      "defaultStatus": "IDLE",
+      "durationSec": 8,
+      "summary": "Playwright BasePage logger capturing DOM clicks, inputs, and snapshots.",
+      "logs": [
+        "[record] initializing browser session (chromium)...",
+        "[record] BasePage action context initialized",
+        "[record] recorded 12 DOM interactions with screenshots",
+        "[record] steps-meta.json saved to results/sessions/"
+      ],
+      "artifacts": [
+        { "label": "Session Metadata", "kind": "json", "href": "./artifacts/traceability/rtm-mini.md" }
+      ]
+    },
+    {
+      "id": "testcase",
+      "name": "AI Testcase Gen",
+      "type": "ai",
+      "defaultStatus": "IDLE",
+      "durationSec": 10,
+      "summary": "Pipeline 2 synthesizing structured test cases from user action logs.",
+      "logs": [
+        "[testcase] reading steps-meta.json...",
+        "[testcase] invoking AI Test Analyzer (gpt-5.6-luna)...",
+        "[testcase] generated 6 test cases (P0: 3, P1: 2, P2: 1)",
+        "[testcase] exported to TEST_CASES.csv & TEST_CASES.md"
+      ],
+      "artifacts": [
+        { "label": "AI Test Cases", "kind": "doc", "href": "./artifacts/qa-tools-samples/ai-testcases-sample.md" }
+      ]
+    },
+    {
+      "id": "api-gen",
+      "name": "AI API Spec Gen",
+      "type": "ai",
+      "defaultStatus": "IDLE",
+      "durationSec": 10,
+      "summary": "Pipeline 3 synthesizing Postman collection with contract assertions.",
+      "logs": [
+        "[api-gen] inspecting network traffic from session trace...",
+        "[api-gen] synthesizing endpoints: GET /users, POST /login",
+        "[api-gen] injecting status code + JSON schema validation scripts",
+        "[api-gen] collection.json generated ready for Newman"
+      ],
+      "artifacts": [
+        { "label": "Postman Collection", "kind": "json", "href": "./artifacts/postman/collection.json" }
+      ]
+    },
+    {
+      "id": "api-run",
+      "name": "Newman Contract Runner",
+      "type": "runner",
+      "defaultStatus": "IDLE",
+      "durationSec": 12,
+      "summary": "Pipeline 4 executing Newman CLI with automated schema assertions.",
+      "logs": [
+        "[api-run] newman run collection.json -e staging.json",
+        "[api-run] 6 requests executed",
+        "[api-run] 6 passed (100% contract compliance)",
+        "[api-run] HTML execution report exported"
+      ],
+      "artifacts": [
+        { "label": "API HTML Report", "kind": "report", "href": "./artifacts/postman/report.html" }
+      ]
+    },
+    {
+      "id": "buglist",
+      "name": "AI Buglist & RCA",
+      "type": "ai",
+      "defaultStatus": "IDLE",
+      "durationSec": 10,
+      "summary": "Pipeline 5 analyzing test failures, console traces, and root cause.",
+      "logs": [
+        "[buglist] reading failed test artifacts (trace.zip, console logs)...",
+        "[buglist] invoking AI Defect Analyzer...",
+        "[buglist] Root Cause Analysis: null pointer on taxCalculation",
+        "[buglist] Severity=S1, Priority=P0, Blocker=YES"
+      ],
+      "artifacts": [
+        { "label": "AI Bug Report & RCA", "kind": "doc", "href": "./artifacts/qa-tools-samples/ai-buglist-sample.md" }
+      ]
+    },
+    {
+      "id": "guide",
+      "name": "AI User Guide Gen",
+      "type": "doc",
+      "defaultStatus": "IDLE",
+      "durationSec": 10,
+      "summary": "Pipeline 8 compiling professional USER_GUIDE.html & PDF with screenshots.",
+      "logs": [
+        "[guide] loading steps-meta.json & step screenshots...",
+        "[guide] invoking AI Technical Writer (Bahasa Indonesia)...",
+        "[guide] generated USER_GUIDE.md & USER_GUIDE.html",
+        "[guide] PDF exported via Playwright headless Chromium"
+      ],
+      "artifacts": [
+        { "label": "AI User Guide HTML", "kind": "report", "href": "./artifacts/qa-tools-samples/ai-userguide-sample.html" }
+      ]
+    }
+  ],
+  "exitCriteria": {
+    "smokePass": 1.0,
+    "apiPass": 0.98,
+    "uiPass": 0.95,
+    "p95Ms": 800,
+    "criticalOpenBugs": 0
+  }
+}
+

@@ -1,0 +1,144 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>User Guide — DODO WebAdmin Login & Access</title>
+  <style>
+    body {
+      font-family: ui-sans-serif, system-ui, -apple-system, sans-serif;
+      background-color: #09090b;
+      color: #f4f4f5;
+      margin: 0;
+      padding: 2rem 1rem;
+      line-height: 1.6;
+    }
+    .container {
+      max-width: 760px;
+      margin: 0 auto;
+      background-color: #18181b;
+      border: 1px solid #27272a;
+      border-radius: 1rem;
+      padding: 2rem;
+    }
+    .badge {
+      display: inline-block;
+      background-color: rgba(16, 185, 129, 0.15);
+      color: #34d399;
+      border: 1px solid rgba(16, 185, 129, 0.3);
+      padding: 0.25rem 0.75rem;
+      border-radius: 9999px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      margin-bottom: 0.75rem;
+    }
+    h1 {
+      font-size: 1.5rem;
+      font-weight: 700;
+      margin-top: 0;
+      margin-bottom: 0.5rem;
+    }
+    .meta {
+      color: #a1a1aa;
+      font-size: 0.875rem;
+      margin-bottom: 1.5rem;
+      border-bottom: 1px solid #27272a;
+      padding-bottom: 1rem;
+    }
+    .step-card {
+      background-color: rgba(9, 9, 11, 0.6);
+      border: 1px solid #27272a;
+      border-radius: 0.75rem;
+      padding: 1.25rem;
+      margin-bottom: 1.25rem;
+    }
+    .step-header {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      margin-bottom: 0.5rem;
+    }
+    .step-num {
+      background-color: #27272a;
+      color: #f4f4f5;
+      width: 1.75rem;
+      height: 1.75rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 9999px;
+      font-size: 0.875rem;
+      font-weight: 700;
+    }
+    .step-title {
+      font-weight: 600;
+      font-size: 1rem;
+    }
+    .step-desc {
+      font-size: 0.875rem;
+      color: #d4d4d8;
+      margin: 0;
+    }
+    .mock-screenshot {
+      background: #18181b;
+      border: 1px dashed #3f3f46;
+      border-radius: 0.5rem;
+      padding: 1.5rem;
+      margin-top: 0.75rem;
+      text-align: center;
+      color: #71717a;
+      font-size: 0.8125rem;
+      font-family: ui-monospace, monospace;
+    }
+    .footer {
+      margin-top: 2rem;
+      border-top: 1px solid #27272a;
+      padding-top: 1rem;
+      font-size: 0.75rem;
+      color: #71717a;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <span class="badge">Pipeline 8: AI Technical Writer</span>
+    <h1>Panduan Pengguna — Login & Otentikasi DODO WebAdmin</h1>
+    <div class="meta">
+      Dokumen ini digenerate secara otomatis dari rekaman Playwright test execution menggunakan model LLM Technical Writer pada <b>qa-assistant-tools</b>.
+    </div>
+
+    <div class="step-card">
+      <div class="step-header">
+        <div class="step-num">1</div>
+        <div class="step-title">Mengakses Halaman Login</div>
+      </div>
+      <p class="step-desc">Buka peramban (Chrome/Firefox/Safari) dan kunjungi URL portal administrasi. Pastikan form input username dan kata sandi telah muncul dengan sempurna.</p>
+      <div class="mock-screenshot">[ Screenshot: Login Page Initial State (01_login_view.png) ]</div>
+    </div>
+
+    <div class="step-card">
+      <div class="step-header">
+        <div class="step-num">2</div>
+        <div class="step-title">Memasukkan Kredensial Pengguna</div>
+      </div>
+      <p class="step-desc">Ketik alamat email atau username resmi terdaftar pada kolom 'Username'. Masukkan kata sandi rahasia pada kolom 'Password'. Anda dapat menekan ikon mata untuk melihat karakter yang diketik.</p>
+      <div class="mock-screenshot">[ Screenshot: Credentials Filled (02_fill_credentials.png) ]</div>
+    </div>
+
+    <div class="step-card">
+      <div class="step-header">
+        <div class="step-num">3</div>
+        <div class="step-title">Verifikasi Dashboard & Akses Sukses</div>
+      </div>
+      <p class="step-desc">Tekan tombol 'Masuk'. Sistem akan memvalidasi otentikasi JWT dan mengarahkan Anda langsung ke halaman ringkasan Dashboard.</p>
+      <div class="mock-screenshot">[ Screenshot: Dashboard Landed (03_dashboard_complete.png) ]</div>
+    </div>
+
+    <div class="footer">
+      Generated automatically by <b>qa-assistant-tools</b> · Open Source QA Automation Framework
+    </div>
+  </div>
+</body>
+</html>
+

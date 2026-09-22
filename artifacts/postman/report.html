@@ -1,0 +1,112 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>ReqRes API Report</title>
+  <style>
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont;
+      background:#0f172a;
+      color:#e5e7eb;
+      padding:24px;
+    }
+    h1, h2 { margin: 0 0 12px; }
+    .muted { color:#9ca3af; font-size: 14px; }
+    .card {
+      background:#020617;
+      border:1px solid #1f2937;
+      border-radius:12px;
+      padding:16px;
+      margin-top:16px;
+    }
+    .ok { color:#34d399; }
+    .warn { color:#fbbf24; }
+    .fail { color:#f87171; }
+    table {
+      width:100%;
+      border-collapse: collapse;
+      margin-top:12px;
+      font-size:14px;
+    }
+    th, td {
+      border-bottom:1px solid #1f2937;
+      padding:8px;
+      text-align:left;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>ReqRes API — Smoke & Core Report</h1>
+  <p class="muted">
+    Pipeline Stage: API Tests (Postman)  
+    <br/>Environment: reqres.in (public demo)  
+    <br/>Executed via: Newman  
+    <br/>Timestamp: 2025-12-20 17:12 (UTC+7)
+  </p>
+
+  <div class="card">
+    <h2>Overall Result</h2>
+    <p>
+      Status: <strong class="ok">PASS</strong>  
+      <br/>
+      Pass rate: <strong>100%</strong> (4 / 4 requests)
+    </p>
+    <p class="muted">
+      Note: Negative test cases are expected to return error responses and are counted as PASS when assertions match expectations.
+    </p>
+  </div>
+
+  <div class="card">
+    <h2>Request Breakdown</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Endpoint</th>
+          <th>Type</th>
+          <th>Expected</th>
+          <th>Result</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>GET /users?page=2</td>
+          <td>Positive</td>
+          <td>200 + non-empty data</td>
+          <td class="ok">PASS</td>
+        </tr>
+        <tr>
+          <td>GET /users/2</td>
+          <td>Positive (Contract)</td>
+          <td>200 + schema valid</td>
+          <td class="ok">PASS</td>
+        </tr>
+        <tr>
+          <td>POST /login</td>
+          <td>Positive</td>
+          <td>200 + token returned</td>
+          <td class="ok">PASS</td>
+        </tr>
+        <tr>
+          <td>POST /login (missing password)</td>
+          <td>Negative</td>
+          <td>400 + error message</td>
+          <td class="ok">PASS</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="card">
+    <h2>Quality Gate Mapping</h2>
+    <p>
+      API pass rate threshold: <strong>&ge; 98%</strong><br/>
+      Current result: <strong>100%</strong>
+    </p>
+    <p class="ok">
+      Gate decision: PASS
+    </p>
+  </div>
+
+</body>
+</html>

@@ -1,0 +1,7 @@
+TC_ID,Title,Module,Priority,Type,Tags,Precondition,Steps,Expected Result,Automation Status,Release Impact,Notes
+REG-001,User can login with valid credentials,Auth,P0,Functional,regression;ui;login,User has valid account,"Open login page; Enter valid username & password; Click Login",User redirected to inventory page,Automated (Playwright),Block release,Entry point for all user flows
+REG-002,Invalid login shows error message,Auth,P1,Negative,regression;ui;login,None,"Enter invalid credentials; Click Login",Error message displayed,Automated (Playwright),Allow with risk,Prevents auth bypass
+REG-003,Add item to cart updates cart badge,Cart,P0,Functional,regression;ui;cart,User logged in,"Add item to cart",Cart badge count increases,Automated (Playwright),Block release,Revenue-impacting action
+REG-004,Remove item from cart updates cart badge,Cart,P1,Functional,regression;ui;cart,Item already in cart,"Remove item",Cart badge decreases,Automated (Playwright),Allow with risk,State consistency
+REG-005,Checkout happy path completes successfully,Checkout,P0,Functional,regression;ui;checkout,User has item in cart,"Proceed to checkout; Complete form; Finish order",Order confirmation displayed,Automated (Playwright),Block release,Critical business flow
+REG-006,Sorting products by price works correctly,Inventory,P2,Functional,regression;ui;sorting,User logged in,"Apply sort by price low to high",Products sorted correctly,Manual,Defer if needed,Lower business risk & visual validation

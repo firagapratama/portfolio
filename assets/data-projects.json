@@ -1,0 +1,38 @@
+{
+  "items": [
+    {
+      "client": "qa-assistant-tools",
+      "logo": "./assets/projects/qa-tools-logo.svg",
+      "featured": true,
+      "badge": "Open Source Tool",
+      "tagline": "QA Automation Toolkit: 8 pipelines, 5 AI modules",
+      "description": "Custom CLI automation framework & test runner: AI testcase generator, API contract assertions, Playwright E2E with POM, k6 performance baselines, and automated user guides.",
+      "github": "https://github.com/firagapratama/qa-assistant-tools",
+      "tags": ["Playwright", "Postman", "k6", "AI Agents", "CLI"]
+    },
+    {
+      "client": "PT. SidoMuncul",
+      "logo": "./assets/projects/sidomuncul.png"
+    },
+    {
+      "client": "PT. Pertamina",
+      "logo": "./assets/projects/pertamina.png"
+    },
+    {
+      "client": "PT. TMMIN",
+      "logo": "./assets/projects/toyota.png"
+    },
+    {
+      "client": "Dinas Lingkungan Hidup",
+      "logo": "./assets/projects/dlhk.png"
+    },
+    {
+      "client": "PT. Aisin Indonesia",
+      "logo": "./assets/projects/aisin.png"
+    },
+    {
+      "client": "PT. Evalinda Berkah Mandiri",
+      "logo": "./assets/projects/dbesto.png"
+    }
+  ]
+}

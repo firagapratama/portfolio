@@ -1,0 +1,4 @@
+TC_ID,Suite,Title,Priority,Type,Target,Preconditions,Steps,Expected Result,Automation Status,Notes
+SMK-001,Smoke,Login success (standard_user),P0,UI,saucedemo.com,"User exists: standard_user","1) Open https://www.saucedemo.com; 2) Enter username: standard_user; 3) Enter password; 4) Click Login","User redirected to Inventory page; products list visible",Planned,"Critical path: authentication"
+SMK-002,Smoke,Add single item to cart,P0,UI,saucedemo.com,"Logged in as standard_user","1) On Inventory page click 'Add to cart' for one item; 2) Observe cart badge; 3) Open Cart","Cart badge shows 1; Cart contains selected item",Planned,"Critical path: add-to-cart"
+SMK-003,Smoke,Checkout happy path (1 item),P0,UI,saucedemo.com,"Cart has 1 item","1) Open Cart; 2) Click Checkout; 3) Fill First Name, Last Name, Zip; 4) Continue; 5) Finish","Checkout complete page shown; success message visible",Planned,"Critical path: purchase flow"

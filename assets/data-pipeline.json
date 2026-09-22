@@ -1,0 +1,126 @@
+{
+  "owner": "Firaga Pratama",
+  "role": "QA Engineer",
+  "stack": ["Playwright", "Postman", "k6"],
+  "stages": [
+    {
+      "id": "prechecks",
+      "name": "Pre-checks",
+      "type": "static",
+      "defaultStatus": "IDLE",
+      "durationSec": 8,
+      "summary": "Basic sanity checks: formatting, linting, config validation.",
+      "logs": [
+        "[pre-checks] env vars (BASE_URL, creds): NOT RUN",
+        "[pre-checks] playwright config (retries, reporter): NOT RUN",
+        "[pre-checks] test tagging policy (@smoke/@regression): NOT RUN",
+        "[pre-checks] locator policy (no waitForTimeout): NOT RUN",
+        "[pre-checks] result: NOT RUN"
+      ],
+      "artifacts": [
+        { "label": "Checklist", "kind": "doc", "href": "/artifacts/release/checklist.md" }
+      ]
+    },
+    {
+      "id": "smoke",
+      "name": "Smoke Tests",
+      "type": "manual",
+      "defaultStatus": "IDLE",
+      "durationSec": 12,
+      "summary": "Critical path verification (login, core navigation, create/read).",
+      "logs": [
+        "[smoke] target=saucedemo.com",
+        "[smoke] SMK-001 login success ... NOT RUN",
+        "[smoke] SMK-002 add to cart ... NOT RUN",
+        "[smoke] SMK-003 checkout happy path ... NOT RUN",
+        "[smoke] result: NOT RUN"
+      ],
+      "artifacts": [
+        { "label": "Smoke Suite", "kind": "sheet", "href": "/artifacts/test-cases/smoke-suite.csv" }
+      ]
+    },
+    {
+      "id": "api",
+      "name": "API Tests (Postman)",
+      "type": "api",
+      "defaultStatus": "IDLE",
+      "durationSec": 18,
+      "summary": "Positive + negative + auth coverage for key endpoints.",
+      "logs": [
+        "[api] runner=newman",
+        "[api] target=reqres.in",
+        "[api] collection=reqres-collection.json",
+        "[api] awaiting execution (local/CI)"
+      ],
+      "artifacts": [
+        { "label": "Postman Collection", "kind": "link", "href": "/artifacts/postman/collection.json" },
+        { "label": "API Report (HTML)", "kind": "report", "href": "/artifacts/postman/report.html" }
+      ],
+      "triage": {
+        "title": "Triage note",
+        "text": "When failures occur, I triage by: reproduction → scope → impact → suspected root cause → next action (fix/re-run/rollback)."
+      }
+    },
+    {
+      "id": "ui",
+      "name": "UI E2E (Playwright)",
+      "type": "ui",
+      "defaultStatus": "IDLE",
+      "durationSec": 22,
+      "summary": "Regression E2E with POM + stable locators. Traces on failure.",
+      "logs": [
+        "[ui] target=saucedemo.com",
+        "[ui] runner=playwright",
+        "[ui] suite: NOT RUN"
+      ],
+      "artifacts": [
+        { "label": "Playwright HTML Report", "kind": "report", "href": "/artifacts/playwright/report/index.html" },
+        { "label": "Trace (zip)", "kind": "file", "href": "/artifacts/playwright/trace.zip" }
+      ],
+      "triage": {
+        "title": "Root cause hypothesis",
+        "text": "When a UI test fails, I validate whether it's: product bug vs test bug vs environment flake, then harden locators and add evidence (trace/screenshot)."
+      }
+    },
+    {
+      "id": "perf",
+      "name": "Performance (k6)",
+      "type": "perf",
+      "defaultStatus": "IDLE",
+      "durationSec": 16,
+      "summary": "Baseline scenario with thresholds (p95, error rate).",
+      "logs": [
+        "[perf] target=reqres.in (GET /api/users?page=2)",
+        "[perf] runner=k6",
+        "[perf] scenario: NOT RUN"
+      ],
+      "artifacts": [
+        { "label": "k6 Script", "kind": "code", "href": "/artifacts/k6/baseline.js" },
+        { "label": "k6 Summary", "kind": "doc", "href": "/artifacts/k6/summary.md" }
+      ]
+    },
+    {
+      "id": "gate",
+      "name": "Quality Gate",
+      "type": "gate",
+      "defaultStatus": "IDLE",
+      "durationSec": 6,
+      "summary": "Release decision based on exit criteria.",
+      "logs": [
+        "[gate] Exit Criteria loaded",
+        "[gate] awaiting stage results (smoke/api/ui/perf)…",
+        "[gate] run pipeline to evaluate decision"
+      ],
+      "artifacts": [
+        { "label": "Exit Criteria", "kind": "doc", "href": "/artifacts/release/exit-criteria.md" }
+      ]
+    }
+  ],
+  "exitCriteria": {
+    "smokePass": 1.0,
+    "apiPass": 0.98,
+    "uiPass": 0.95,
+    "p95Ms": 800,
+    "criticalOpenBugs": 0
+  }
+}

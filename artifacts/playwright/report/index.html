@@ -1,0 +1,140 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Playwright UI E2E Report</title>
+  <style>
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont;
+      background:#0f172a;
+      color:#e5e7eb;
+      padding:24px;
+    }
+    h1 { margin: 0 0 8px; }
+    h2 { margin: 0 0 10px; font-size: 16px; }
+    .muted { color:#9ca3af; font-size: 14px; line-height: 1.5; }
+    .card {
+      background:#020617;
+      border:1px solid #1f2937;
+      border-radius:12px;
+      padding:16px;
+      margin-top:16px;
+    }
+    .pass { color:#34d399; }
+    .fail { color:#fb7185; }
+    .warn { color:#fbbf24; }
+
+    table { width: 100%; border-collapse: collapse; margin-top: 10px; font-size: 14px; }
+    th, td { border-bottom:1px solid #1f2937; padding: 8px; text-align:left; }
+    .pill {
+      display:inline-flex; align-items:center; gap:8px;
+      padding:4px 10px; border-radius:999px;
+      background:#111827; border:1px solid #1f2937;
+      font-size:12px; color:#e5e7eb;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>SauceDemo — UI E2E (Playwright)</h1>
+  <p class="muted">
+    Pipeline Stage: UI E2E (Playwright)<br/>
+    Target: saucedemo.com (public demo)<br/>
+    Browser: Chromium<br/>
+    Strategy: POM + stable locators (getByRole / getByTestId preferred)<br/>
+    Command: <span class="pill">playwright test --project=chromium</span><br/>
+    Timestamp: 2025-12-20 17:20 (UTC+7)
+  </p>
+
+  <div class="card">
+    <h2>Overall Result</h2>
+    <p>
+      Status: <strong class="fail">FAILED</strong><br/>
+      Total tests: <strong>6</strong><br/>
+      Passed: <strong>5</strong> · Failed: <strong>1</strong><br/>
+      UI pass rate: <strong>83%</strong>
+    </p>
+    <p class="muted">
+      Note: One failure blocks the stage because it indicates a regression risk in user-facing behavior.
+    </p>
+  </div>
+
+  <div class="card">
+    <h2>Test Breakdown</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Scenario</th>
+          <th>Result</th>
+          <th>Notes</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Login → Inventory</td>
+          <td class="pass">PASS</td>
+          <td class="muted">Entry flow validated</td>
+        </tr>
+        <tr>
+          <td>Add to Cart (multiple items)</td>
+          <td class="pass">PASS</td>
+          <td class="muted">Cart badge + state update OK</td>
+        </tr>
+        <tr>
+          <td>Remove item from cart</td>
+          <td class="pass">PASS</td>
+          <td class="muted">State consistency OK</td>
+        </tr>
+        <tr>
+          <td>Checkout end-to-end</td>
+          <td class="pass">PASS</td>
+          <td class="muted">Critical business flow OK</td>
+        </tr>
+        <tr>
+          <td>Logout</td>
+          <td class="pass">PASS</td>
+          <td class="muted">Session termination OK</td>
+        </tr>
+        <tr>
+          <td>Sorting products</td>
+          <td class="fail">FAIL</td>
+          <td class="muted">Root cause: locator ambiguity / unstable selector</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="card">
+    <h2>Failure Summary</h2>
+    <p>
+      Failed scenario: <strong>Sorting products</strong><br/>
+      Suspected root cause: <span class="warn">Locator ambiguity</span> (multiple matches / DOM changes)<br/>
+      Recommended fix:
+    </p>
+    <ul class="muted">
+      <li>Prefer <b>getByRole</b> with accessible name for dropdown and options</li>
+      <li>Add <b>data-testid</b> for sorting control to avoid layout/whitespace changes</li>
+      <li>Assert sorting result via product price array comparison (deterministic)</li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <h2>Evidence</h2>
+    <ul class="muted">
+      <li>Screenshot: <code>artifacts/playwright/screenshots/sort-failure.png</code></li>
+      <li>Trace: <code>artifacts/playwright/trace.zip</code></li>
+      <li>Playwright HTML Report: this page</li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <h2>Quality Gate Mapping</h2>
+    <p class="muted">
+      UI E2E pass rate threshold: <strong>&ge; 95%</strong><br/>
+      Current result: <strong>83%</strong>
+    </p>
+    <p class="fail"><strong>Gate decision: FAIL</strong> (ui below threshold)</p>
+  </div>
+
+</body>
+</html>
